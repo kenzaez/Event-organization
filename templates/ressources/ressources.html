@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .table-responsive {
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+  }
+  
+  
+  .table-responsive::-webkit-scrollbar {
+    display: none;
+  }
+  </style>
+
+      <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+            
+              <p class="card-description"> Food </code>
+              </p>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>type</th>
+                      <th>Event</th>
+                      <th>Supplier</th>
+                      <th>Quantity</th>
+                      <th>Returned</th>
+                      <th>Damaged</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for ress in ressources %} 
+                    {% if ress.type == 'Food' %}
+                    <tr>
+                      <td>{{ress.nom}}</td>
+                      <td>{{ress.type}}</td>
+                      <td>{{ress.evenement}}</td>
+                      <td>{{ress.fournisseur}}</td>
+                      <td>{{ress.quantite_disponible}}</td>
+                      
+                      {% if ress.returned %}
+                      <td><label class="badge badge-success">Returned</label></td>
+                  {% else %}
+                      <td><label class="badge badge-danger">Not yet</label></td>
+                  {% endif %}
+                  
+                     <td>{{ress.damaged}}</td>
+                     <td>
+                      <a href="{% url 'RessEdit' ress.id %}" class="btn btn-dark btn-icon-text">
+                            <i class="mdi mdi-file-check btn-icon-append"></i> Edit
+                      </a> 
+                      <form method="post" action="{% url 'ressourceReturned' ress.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-warning btn-icon-text deleted">
+                        <i class="mdi mdi-delete btn-icon-prepend"></i> Mark as Returned
+                    </button>
+                </form>
+                    </td>
+
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                    
+                      <p class="card-description"> Material </code>
+                      </p>
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>Name</th>
+                              <th>type</th>
+                              <th>Event</th>
+                              <th>Supplier</th>
+                              <th>Quantity</th>
+                              <th>Returned</th>
+                              <th>Damaged</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for ress in ressources %} 
+                            {% if ress.type == 'Materiel' %}
+                            <tr>
+                              <td>{{ress.nom}}</td>
+                              <td>{{ress.type}}</td>
+                              <td>{{ress.evenement}}</td>
+                              <td>{{ress.fournisseur}}</td>
+                              <td>{{ress.quantite_disponible}}</td>
+                              
+                              {% if ress.returned %}
+                              <td><label class="badge badge-success">Returned</label></td>
+                          {% else %}
+                              <td><label class="badge badge-danger">Not yet</label></td>
+                          {% endif %}
+                          
+                             <td>{{ress.damaged}}</td>
+                             <td>
+                              <a href="{% url 'RessEdit' ress.id %}" class="btn btn-dark btn-icon-text">
+                                    <i class="mdi mdi-file-check btn-icon-append"></i> Edit
+                              </a> 
+                              <form method="post" action="{% url 'ressourceReturned' ress.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-warning btn-icon-text deleted">
+                                <i class="mdi mdi-delete btn-icon-prepend"></i> Mark as Returned
+                            </button>
+                        </form>
+                            </td>
+        
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<!-- Include CSS for Select2 -->
+<link href="{% static 'django_select2/css/select2.css' %}" rel="stylesheet" />
+
+<!-- Include JavaScript for Select2 -->
+<script src="{% static 'django_select2/js/select2.js' %}"></script>
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Add Supplier</h4>
+
+            <form method="POST" class="forms-sample">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="id_date_evenement">Name</label>
+                    {{ form.nom }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_type">Type</label>
+                    {{ form.type }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_date_contrat">phone number </label>
+                    {{ form.num_tel }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_client">Email</label>
+                    {{ form.email }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_fournisseurs">Adresse</label>
+                    {{ form.adresse }}
+                </div>
+
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <button type="reset" class="btn btn-dark">Cancel</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Corona Admin</title>
+    <link rel="stylesheet" href="{% static 'vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="row w-100 m-0">
+          <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+            <div class="card col-lg-4 mx-auto">
+              <div class="card-body px-5 py-5">
+                <h3 class="card-title text-left mb-3">Register</h3>
+                <form method="POST">
+                  {% csrf_token %}
+
+                  <div class="form-group">
+                    <label for="id_username">Username</label>
+                    {{ form.username|add_class:"form-control" }}
+                  </div>
+                  <div class="form-group">
+                    <label for="id_email">Email</label>
+                    {{ form.email|add_class:"form-control" }}
+                  </div>
+                  <div class="form-group">
+                    <label for="id_password">Password</label>
+                    {{ form.password|add_class:"form-control" }}
+                  </div>
+
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input"> Remember me
+                    </label>
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-block enter-btn">Register</button>
+                  </div>
+                  <p class="terms text-center">By creating an account you are accepting our <a href="#">Terms & Conditions</a></p>
+                </form>
+
+                {% if form.errors %}
+                <div class="alert alert-danger mt-3">
+                  {{ form.errors }}
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'vendors/js/vendor.bundle.base.js' %}"></script>
+    <script src="{% static 'js/off-canvas.js' %}"></script>
+    <script src="{% static 'js/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'js/misc.js' %}"></script>
+    <script src="{% static 'js/settings.js' %}"></script>
+    <script src="{% static 'js/todolist.js' %}"></script>
+  </body>
+</html>

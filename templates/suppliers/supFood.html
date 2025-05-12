@@ -1,0 +1,74 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .table-responsive {
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+  }
+  
+  
+  .table-responsive::-webkit-scrollbar {
+    display: none;
+  }
+  tr.deleted-row {
+    background-color: #f0f0f0;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+  </style>
+<div class="card-body">
+    <p class="card-description"> Food Supplier
+    </p>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th> Supplier Name </th>
+            <th> Type </th>
+            <th> Phone number </th>
+            <th> Email </th>
+            <th> Adress </th>
+            <th> Actions </th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for fourn in fourns %}
+            {% if fourn.deleted %}
+            <tr id="deleted-row" class="deleted-row">
+            {% else %}
+            <tr>
+            {% endif %}
+
+          
+            <td> {{fourn.nom}} </td>
+            <td> {{fourn.type}}</td>
+            <td> {{fourn.num_tel}} </td>
+            <td> {{fourn.email}} </td>
+            <td> {{fourn.adresse}} </td>
+            {% if not fourn.deleted %}
+            <td>
+                <a href="{% url 'supplierEdit' fourn.id %}" class="btn btn-dark btn-icon-text">
+                    <i class="mdi mdi-file-check btn-icon-append"></i> Edit
+                </a> 
+         
+                <form method="post" action="{% url 'fournDelete' fourn.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-warning btn-icon-text deleted">
+                        <i class="mdi mdi-delete btn-icon-prepend"></i> Mark as Deleted
+                    </button>
+                </form>
+                
+            </td>
+            {% endif %}
+          </tr>
+          <tr>
+           {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,80 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .table-responsive {
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+  }
+  
+  
+  .table-responsive::-webkit-scrollbar {
+    display: none;
+  }
+  tr.deleted-row {
+    background-color: #f0f0f0;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+  </style>
+<div class="card-body">
+    <p class="card-description"> Clients
+    </p>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Photo</th>
+            <th> Client Name </th>
+            <th> Type </th>
+            <th> Phone number </th>
+            <th> Email </th>
+            <th> Adress </th>
+            <th> Actions </th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+            {% if client.deleted %}
+            <tr id="deleted-row" class="deleted-row">
+            {% else %}
+            <tr>
+            {% endif %}
+
+            <td class="py-1">
+            {% if client.image %}
+            <img src="{{ client.image.url }}" alt="Uploaded image">
+            {% endif %}
+            </td>
+            <td> {{client.nom}} </td>
+            <td> {{client.type}}</td>
+            <td> {{client.num_tel}} </td>
+            <td> {{client.email}} </td>
+            <td> {{client.adresse}} </td>
+            {% if not client.deleted %}
+            <td>
+                <a href="{% url 'clientEdit' client.id %}" class="btn btn-dark btn-icon-text">
+                    <i class="mdi mdi-file-check btn-icon-append"></i> Edit
+                </a> 
+         
+                <form method="post" action="{% url 'clientDelete' client.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-warning btn-icon-text deleted">
+                        <i class="mdi mdi-delete btn-icon-prepend"></i> Mark as Deleted
+                    </button>
+                </form>
+                
+            </td>
+            {% endif %}
+          </tr>
+          <tr>
+           {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+      <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+            
+              <p class="card-description"> Payments </code>
+              </p>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Client</th>
+                      <th>Event</th>
+                      <th>Amount</th>
+                      <th>Rest</th>
+                      <th>Progress</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for pay in pays %} 
+                    <tr>
+                      <td>{{pay.client}}</td>
+                      <td>{{pay.evenement}}</td>
+                      <td>{{pay.montant}}</td>
+                      <td>{{pay.reste}}</td>
+                      {% if pay.reste > 0 and not pay.is_overdue %}
+                      <td><label class="badge badge-info">Not complete </label></td>
+                     {% elif pay.reste == 0 and not pay.is_overdue %}
+                     <td><label class="badge badge-success"> complete </label></td>
+                     {% else %}
+                     <td><label class="badge badge-danger"> Late </label></td>
+                     {% endif %}
+                     <td>
+                      <a href="{% url 'payEdit' pay.id %}" class="btn btn-dark btn-icon-text">
+                            <i class="mdi mdi-file-check btn-icon-append"></i> Edit
+                      </a> 
+                    </td>
+
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+{% endblock %}

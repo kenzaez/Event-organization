@@ -1,0 +1,254 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Corona Admin</title>
+    <link rel="stylesheet" href="{% static 'vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/jvectormap/jquery-jvectormap.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/flag-icon-css/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/owl-carousel-2/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/owl-carousel-2/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
+</head>
+
+<body>
+    <div class="container-scroller">
+        <!-- partial:SIDE BAR-->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+                <a  href=""><img width="170px" height="170px"
+                    src="{% static 'images/logo.png' %}"
+                        alt="logo" /></a>
+                <a class="sidebar-brand brand-logo-mini" href=""><img src="{% static 'images/logo-mini.svg' %}"
+                        alt="logo" /></a>
+            </div>
+            <ul class="nav">
+                <li class="nav-item nav-category">
+                    <span class="nav-link">Navigation</span>
+                </li>
+
+                <!-- DASHBOARD -->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-speedometer"></i>
+                        </span>
+                        <span class="menu-title">Dashboard</span>
+                    </a>
+                </li>
+                <!-- END DASHBOARD -->
+
+                <!-- EVENTS -->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-ev" aria-expanded="false"
+                        aria-controls="ui-ev">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-calendar-multiselect"></i>
+                        </span>
+                        <span class="menu-title">Events</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-ev">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'eventForm' %}">Add Event</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'events' %}">View Events</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- END EVENTS -->
+
+                <!-- CLIENT -->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
+                        aria-controls="ui-basic">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-account-multiple"></i>
+                        </span>
+                        <span class="menu-title">Clients</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'clientForm' %}">Add Client</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'clients' %}">View Clients</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- END CLIENT -->
+
+                <!-- PAYMENTS -->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-pay" aria-expanded="false"
+                        aria-controls="ui-pay">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-cash-multiple"></i>
+                        </span>
+                        <span class="menu-title">Payments</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-pay">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'RegisterPay' %}">Add Payment</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'payement' %}">View Payments</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- END PAYMENTS -->
+
+                <!-- SUPPLIERS -->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-supp" aria-expanded="false"
+                        aria-controls="ui-supp">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-account-multiple"></i>
+                        </span>
+                        <span class="menu-title">Suppliers</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-supp">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'supplierForm' %}">Add Suppliers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'choose' %}">View Suppliers</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- END SUPPLIERS -->
+
+                <!-- Resources -->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-ress" aria-expanded="false"
+                        aria-controls="ui-ress">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-archive"></i>
+                        </span>
+                        <span class="menu-title">Ressources</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-ress">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'ressource_form' %}">Add Ressources</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'ressources' %}">View Ressources</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- END Resources -->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-bell"></i>
+                        </span>
+                        <span class="menu-title">Notifications</span>
+
+
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- NAVIGATION BAR -->
+            <nav class="navbar p-0 fixed-top d-flex flex-row">
+                <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+                    <a class="navbar-brand brand-logo-mini" href=""><img
+                            src="{% static 'images/logo-mini.svg' %}" alt="logo" /></a>
+                </div>
+                <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+                    <button class="navbar-toggler navbar-toggler align-self-center" type="button"
+                        data-toggle="minimize">
+                        <span class="mdi mdi-menu"></span>
+                    </button>
+                    <ul class="navbar-nav w-100">
+                        <li class="nav-item w-100">
+                            <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                                <input type="text" class="form-control" placeholder="Search products">
+                            </form>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav navbar-nav-right">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                                <div class="navbar-profile">
+                                    <img class="img-xs rounded-circle"
+                                        src="{% static 'images/faces/face15.jpg' %}" alt="">
+                                    <p class="mb-0 d-none d-sm-block navbar-profile-name">{{request.user.username}}</p>
+                                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                                aria-labelledby="profileDropdown">
+                                <div class="dropdown-divider"></div>
+                                <a href="{% url 'logout' %}" class="dropdown-item preview-item">
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject mb-1">Log out</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                        data-toggle="offcanvas">
+                        <span class="mdi mdi-format-line-spacing"></span>
+                    </button>
+                </div>
+            </nav>
+            <!-- partial -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    {% block content %}
+                    <!-- Default content goes here -->
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+   <!-- plugins:js -->
+<script src="{% static 'vendors/js/vendor.bundle.base.js' %}"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script src="{% static 'vendors/chart.js/Chart.min.js' %}"></script>
+<script src="{% static 'vendors/progressbar.js/progressbar.min.js' %}"></script>
+<script src="{% static 'vendors/jvectormap/jquery-jvectormap.min.js' %}"></script>
+<script src="{% static 'vendors/jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
+<script src="{% static 'vendors/owl-carousel-2/owl.carousel.min.js' %}"></script>
+<script src="{% static 'assets/js/misc.js' %}"></script>
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="{% static 'js/off-canvas.js' %}"></script>
+<script src="{% static 'js/hoverable-collapse.js' %}"></script>
+<script src="{% static 'js/misc.js' %}"></script>
+<script src="{% static 'js/settings.js' %}"></script>
+<script src="{% static 'js/todolist.js' %}"></script>
+<!-- endinject -->
+<!-- Custom js for this page -->
+<script src="{% static 'js/dashboard.js' %}"></script>
+<!-- End custom js for this page -->
+</body>
+
+</html>

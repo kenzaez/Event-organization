@@ -1,0 +1,253 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  .table-responsive {
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+  }
+
+  .table-responsive::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .transaction-chart {
+    max-height: 200px;
+    margin-bottom: 20px;
+  }
+  
+  .payment-item {
+    background-color: #191c24;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+  
+  .payment-type {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 5px;
+  }
+  
+  .payment-date {
+    font-size: 14px;
+    color: #6c7293;
+    margin-bottom: 0;
+  }
+  
+  .payment-amount {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: right;
+  }
+
+  .badge-growth {
+    display: inline-block;
+    padding: 0.15rem 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 0.35rem;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .badge-growth.up {
+    background-color: #e6ffed;
+    color: #28a745;
+  }
+  .badge-growth.down {
+    background-color: #ffe6e6;
+    color: #dc3545;
+  }
+</style>
+<div class="row">
+
+  <!-- Potential Growth -->
+  <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-9">
+            <div class="d-flex align-items-center align-self-start">
+              <h5 class="mb-0">${{ potential_amount|floatformat:2 }}</h5>
+              <span class="badge-growth {% if potential_growth|floatformat:2 > 0 %}up{% else %}down{% endif %} ml-2">
+                {% if potential_growth|floatformat:0 > 0 %}+{% endif %}{{ potential_growth|floatformat:0 }}%
+              </span>
+            </div>
+          </div>
+          <div class="col-3">
+            {% if potential_growth|floatformat:2 > 0 %}
+              <div class="icon icon-box-success">
+                <span class="mdi mdi-arrow-top-right icon-item"></span>
+              </div>
+            {% else %}
+              <div class="icon icon-box-danger">
+                <span class="mdi mdi-arrow-bottom-left icon-item"></span>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        <h6 class="text-muted font-weight-normal">Potential growth</h6>
+      </div>
+    </div>
+  </div>
+
+  <!-- Revenue Current -->
+  <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-9">
+            <div class="d-flex align-items-center align-self-start">
+              <h5 class="mb-0">${{ revenue_amount|floatformat:2 }}</h5>
+              <span class="badge-growth {% if revenue_growth|floatformat:2 > 0 %}up{% else %}down{% endif %} ml-2">
+                {% if revenue_growth|floatformat:0 > 0 %}+{% endif %}{{ revenue_growth|floatformat:0 }}%
+              </span>
+            </div>
+          </div>
+          <div class="col-3">
+            {% if revenue_growth|floatformat:2 > 0 %}
+              <div class="icon icon-box-success">
+                <span class="mdi mdi-arrow-top-right icon-item"></span>
+              </div>
+            {% else %}
+              <div class="icon icon-box-danger">
+                <span class="mdi mdi-arrow-bottom-left icon-item"></span>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        <h6 class="text-muted font-weight-normal">Revenue current</h6>
+      </div>
+    </div>
+  </div>
+
+  <!-- Daily Income -->
+  <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-9">
+            <div class="d-flex align-items-center align-self-start">
+              <h5 class="mb-0">${{ daily_amount|floatformat:2 }}</h5>
+
+              <span class="badge-growth {% if daily_growth|floatformat:2 > 0 %}up{% else %}down{% endif %} ml-2">
+                {% if daily_growth|floatformat:0 > 0 %}+{% endif %}{{ daily_growth|floatformat:0 }}%
+              </span>
+            </div>
+          </div>
+          <div class="col-3">
+            {% if daily_growth|floatformat:2 > 0 %}
+              <div class="icon icon-box-success">
+                <span class="mdi mdi-arrow-top-right icon-item"></span>
+              </div>
+            {% else %}
+              <div class="icon icon-box-danger">
+                <span class="mdi mdi-arrow-bottom-left icon-item"></span>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        <h6 class="text-muted font-weight-normal">Daily Income</h6>
+      </div>
+    </div>
+  </div>
+
+  <!-- Expense Current (Static) -->
+  <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-9">
+            <div class="d-flex align-items-center align-self-start">
+              <h5 class="mb-0">$31.53</h5>
+              <span class="badge-growth up ml-2">+3.5%</span>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="icon icon-box-success">
+              <span class="mdi mdi-arrow-top-right icon-item"></span>
+            </div>
+          </div>
+        </div>
+        <h6 class="text-muted font-weight-normal">Expense current</h6>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- PAYMENT GO LOOK IN DASHBOARD.JS -->
+<div class="row">
+  <div class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Payment History</h4>
+    
+        
+        {% for pay in pays %}
+        <div class="payment-item">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h6 class="payment-type">Payed by {{ pay.type }}</h6>
+              <p class="payment-date">{{ pay.date_paiement }}</p>
+            </div>
+            <div>
+              <h6 class="payment-amount">${{ pay.montant }}</h6>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <!-- PAYMENT END -->
+
+  <!-- ORDER STATUS -->
+  <div class="col-md-8 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Order Status</h4>
+        <div class="d-flex flex-row justify-content-between">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>
+                    <div class="form-check form-check-muted m-0">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input">
+                      </label>
+                    </div>
+                  </th>
+                  <th> Client Name </th>
+                  <th> type </th>
+                  <th> Event date </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for event in events %}
+                <tr> 
+                  <td>
+                    <div class="form-check form-check-muted m-0">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input">
+                      </label>
+                    </div>
+                  </td>
+                  <td> {{event.client}} </td>
+                  <td> {{event.type}} </td>
+                  <td>{{event.date_evenement}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END ORDER STATUS -->
+  
+ 
+{% endblock %}

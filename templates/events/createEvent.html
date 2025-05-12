@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<!-- Include CSS for Select2 -->
+<link href="{% static 'django_select2/css/select2.css' %}" rel="stylesheet" />
+
+<!-- Include JavaScript for Select2 -->
+<script src="{% static 'django_select2/js/select2.js' %}"></script>
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Add Event</h4>
+
+            <form method="POST" class="forms-sample">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="id_date_evenement">Event Date</label>
+                    {{ form.date_evenement }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_type">Type</label>
+                    {{ form.type }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_date_contrat">Contract Date</label>
+                    {{ form.date_contrat }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_client">Client</label>
+                    {{ form.client }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_fournisseurs">Fournisseur</label>
+                    {{ form.fournisseurs }}
+                </div>
+            
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <button type="reset" class="btn btn-dark">Cancel</button>
+                {% if form.errors %}
+                <div class="alert alert-danger">
+                  {{ form.errors }}
+                </div>
+                {% endif %}
+            </form>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#id_client').select2();
+        $('#id_fournisseurs').select2();
+    });
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<!-- Include CSS for Select2 -->
+<link href="{% static 'django_select2/css/select2.css' %}" rel="stylesheet" />
+
+<!-- Include JavaScript for Select2 -->
+<script src="{% static 'django_select2/js/select2.js' %}"></script>
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Add Ressource</h4>
+
+            <form method="POST" class="forms-sample" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <!-- Name Field -->
+                <div class="form-group">
+                    <label for="id_nom">Name</label>
+                    {{ form.nom }}
+                </div>
+
+                <!-- Type Field -->
+                <div class="form-group">
+                    <label for="id_type">Type</label>
+                    {{ form.type }}
+                </div>
+
+                <!-- Quantité Disponible Field -->
+                <div class="form-group">
+                    <label for="id_quantite_disponible">Available Quantity</label>
+                    {{ form.quantite_disponible }}
+                </div>
+
+                <!-- Coût Unitaire Field -->
+                <div class="form-group">
+                    <label for="id_cout_unitaire">Unit Cost</label>
+                    {{ form.cout_unitaire }}
+                </div>
+
+                <!-- Disponibilité Field -->
+                <div class="form-group">
+                    <label for="id_disponible">Available</label>
+                    {{ form.disponible }}
+                </div>
+
+                <!-- Fournisseur Field -->
+                <div class="form-group">
+                    <label for="id_fournisseur">Supplier</label>
+                    {{ form.fournisseur }}
+                </div>
+
+           
+                <!-- Date Acquisition Field -->
+                <div class="form-group">
+                    <label for="id_date_acquisition">Acquisition Date</label>
+                    {{ form.date_acquisition }}
+                </div>
+
+                <!-- Damaged Field -->
+                <div class="form-group">
+                    <label for="id_damaged">Damaged Quantity</label>
+                    {{ form.damaged }}
+                </div>
+
+                <!-- Evenement Field -->
+                <div class="form-group">
+                    <label for="id_evenement">Event</label>
+                    {{ form.evenement }}
+                </div>
+
+                <!-- Submit Buttons -->
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <button type="reset" class="btn btn-dark">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
